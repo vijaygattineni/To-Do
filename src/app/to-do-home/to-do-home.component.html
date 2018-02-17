@@ -1,0 +1,94 @@
+<div class="to-do-container">
+  <div class="row">
+    <!--Side Menu-->
+    <div class="col-xs-3 col-sm-3 col-md-3 to-do-menu-contianer">
+      <div class="to-do-menu">
+        <ul>
+          <li (click)="selectTab(1)" class="{{(tab === 1) ? 'selected-tab' : ''}}">
+            <span class="fa fa-fw fa-check-square"></span>
+            <span div class="menu-text">
+              <div class="menu-lable">All tasks</div>
+              <div class="menu-description">{{toDoList.length}} task</div>
+            </span>
+          </li>
+          <li (click)="selectTab(2)" class="{{(tab === 2) ? 'selected-tab' : ''}}">
+            <span class="fa fa-fw fa-star"></span>
+            <span div class="menu-text">
+              <div class="menu-lable">Starred tasks</div>
+              <div class="menu-description">{{starredToDo.length}} task</div>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--Side Menu End-->
+
+    <!--ToDo List-->
+    <div class="col-xs-9 col-sm-9 col-md-9 to-do-list">
+      <div class="list-header">
+        <span [hidden]="tab === 2" class="fa fa-fw fa-check-square"></span>
+        <span [hidden]="tab === 2">All Tasks</span>
+        <span [hidden]="tab === 1" class="fa fa-fw fa-star"></span>
+        <span [hidden]="tab === 1">Starred Tasks</span>
+        <span class="fa fa-plus pull-right" (click)="openModal(template)"></span>
+      </div>
+      <div [hidden]="tab === 2" *ngFor="let todo of toDoList">
+        <div class="todo-item-box">
+          <div class="todo-title">{{todo.title}} 
+            <span class="pull-right" (click)="updateStar(todo.id)"> <i class="fa fa-star {{ todo.starred ? 'starred-class': '' }}"></i></span>
+          </div>
+          <div class="todo-description">{{todo.description}}</div>
+          <div class="todo-item-footer">
+            <span class="to-do-timestamp">{{todo.created_timestamp | date}}</span>
+            <span class="to-do-username pull-right"><i class="fa fa-user"></i> {{todo.user_name}}</span>
+          </div>
+        </div>
+      </div>
+      <div [hidden]="tab === 1" *ngFor="let todo of starredToDo">
+        <div class="todo-item-box">
+          <div class="todo-title">{{todo.title}} 
+            <span class="pull-right" (click)="updateStar(todo.id)"> <i class="fa fa-star {{ todo.starred ? 'starred-class': '' }}"></i></span>
+          </div>
+          <div class="todo-description">{{todo.description}}</div>
+          <div class="todo-item-footer">
+            <span class="to-do-timestamp">{{todo.created_timestamp | date}}</span>
+            <span class="to-do-username pull-right"><i class="fa fa-user"></i> {{todo.user_name}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="no-tasks-msg" [hidden]="toDoList.length">
+        No Tasks, create one using the " <strong>Plus icon </strong>".
+      </div>
+      <!--Add Task Model-->
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Create To Do</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="tdForm" autocomplete="off" (ngSubmit)="todoSubmit(tdForm.valid)">
+            <div class="form-group">
+              <label class="required">Title</label>
+              <input class="form-control" maxlength="30" id="txt-group-id" type="text" formControlName="title" placeholder="Enter Title">
+              <div id="err-txt-color-name" class="text-danger error-cz" *ngIf="!(tdForm.controls.title.valid || (tdForm.controls.title.pristine && !submitted))">
+                <span *ngIf="tdForm.controls.title.hasError('required')">Title is required</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="required">Description</label>
+              <textarea id="txtdesc" maxlength="500" class="form-control" formControlName="description" placeholder="Enter description here"></textarea>
+              <div id="err-txt-color-name" class="text-danger error-cz" *ngIf="!(tdForm.controls.description.valid || (tdForm.controls.description.pristine && !submitted))">
+                <span *ngIf="tdForm.controls.description.hasError('required')">Description is required</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary pull-right" type="submit" [disabled]="!tdForm.valid">Save</button>
+          </form>
+        </div>
+      </ng-template>
+    </div>
+    <!--ToDo List End-->
+  </div>
+</div>

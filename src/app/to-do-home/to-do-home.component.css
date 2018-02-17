@@ -1,0 +1,71 @@
+.to-do-container .to-do-menu-contianer {
+  background-color: #434650;
+  padding-right: 0px;
+}
+.to-do-container .to-do-menu ul {
+  list-style-type: none;
+  padding-left: 0px;
+  color: #ffffff;
+}
+.to-do-container .to-do-menu ul li {
+  padding: 10px 0px 10px 20px;
+}
+.to-do-container .to-do-menu ul .menu-text {
+ display: inline-block;
+ padding-left: 5px;
+}
+.to-do-container .to-do-menu ul .menu-text .menu-lable {
+  font-size: 14px;
+}
+.to-do-container .to-do-menu ul .menu-text .menu-description {
+  font-size: 12px;
+}
+.to-do-container .to-do-menu ul .fa {
+  font-size: 24px;
+  vertical-align: super;
+}
+.to-do-container .to-do-menu ul li:hover {
+  color: #23b7e5;
+  cursor: pointer;
+}
+.to-do-container .to-do-menu ul .selected-tab {
+  background-color: #a7a7a7;
+}
+.to-do-container .to-do-list {
+  padding-left: 0px;
+}
+.to-do-container .to-do-list .list-header {
+  background-color: #999999;
+  color: #ffffff;
+  font-size: 24px;
+  padding: 10px 20px 10px 20px;
+}
+.to-do-container .to-do-list .no-tasks-msg {
+  padding-top: 100px;
+  text-align: center;
+}
+.to-do-container .to-do-list .list-header .fa-plus {
+  padding: 5px;
+  cursor: pointer;
+}
+.to-do-container .todo-item-box {
+    margin: 20px;
+    border: solid 1px #a7a7a7;
+    border-radius: 5px;
+    padding: 10px;
+}
+.to-do-container .starred-class {
+  color: orange;
+}
+.to-do-container .todo-description {
+    font-size: 14px;
+}
+.to-do-container .todo-item-footer {
+    padding-top: 20px;
+    font-size: 12px;
+}
+@media only screen and (min-width: 580px) {
+    .to-do-container .to-do-menu-contianer {
+        min-height: calc(100vh - 71px);
+    }
+}
